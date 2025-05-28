@@ -8,5 +8,3 @@ _creds.py_ mangler, det er her API nøkkler og andre secrets legges
 
 Koden formaterer en CSV fil fra JSON og lagrer den. Deretter er det skrevert metoder for å gjøre CSV om til JSON, GeoJSON, TopoJSON, KML, XLSX, XML og YML. 
 Alle filer lastet opp til datasett ID = DATASETTID
-
-HUSK: Epost for Blidensol
