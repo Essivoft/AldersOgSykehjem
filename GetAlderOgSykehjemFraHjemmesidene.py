@@ -182,19 +182,18 @@ def scrape_from_json():
     except Exception as e:
         logging.error(f"Feil under scraping 'def scrape_from_json': {e}")
 
-# def main():
-#     p = argparse.ArgumentParser(description='Two-step scraper')
-#     sub = p.add_subparsers(dest='cmd')
-#     sub.add_parser('extract')
-#     sub.add_parser('scrape')
-#     args = p.parse_args()
-#     if args.cmd == 'extract': extract_urls()
-#     elif args.cmd == 'scrape': scrape_from_json()
-#     else: p.print_help()
+def main():
+    p = argparse.ArgumentParser(description='Two-step scraper')
+    sub = p.add_subparsers(dest='cmd')
+    sub.add_parser('extract')
+    sub.add_parser('scrape')
+    args = p.parse_args()
+    if args.cmd == 'extract': extract_urls()
+    elif args.cmd == 'scrape': scrape_from_json()
+    else: p.print_help()
 
-# if __name__ == '__main__':
-#     main()
-
+if __name__ == '__main__':
+    main()
 
 # CSV to JSON conversion
 def csv_to_json(csv_file, json_file):
@@ -281,7 +280,7 @@ Method for updating a dataset in CKAN
  name = name of resource in CKAN
 desc = desc on the resource in CKAN
 '''''''''
-ua = 'Alders&SykehjemUploadOpencom/1.0 (+https://opencom.no)'
+ua = 'DIN_USERAGENT/1.0 (+https://opencom.no)'
 
 # CSV file
 def upload_csv_to_ckan():
