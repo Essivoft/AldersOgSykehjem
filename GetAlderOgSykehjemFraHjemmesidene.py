@@ -280,7 +280,7 @@ Method for updating a dataset in CKAN
  name = name of resource in CKAN
 desc = desc on the resource in CKAN
 '''''''''
-ua = 'DIN_USERAGENT/1.0 (+https://opencom.no)'
+ua = 'Alders&SykehjemUploadOpencom/1.0 (+https://opencom.no)'
 
 # CSV file
 def upload_csv_to_ckan():
