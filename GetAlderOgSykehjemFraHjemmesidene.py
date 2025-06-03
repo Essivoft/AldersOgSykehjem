@@ -40,7 +40,7 @@ HEADERS = {
 }
 
 # Set up logging
-logging.basicConfig(filename=LOG_FILE, level=logging.WARNING, format='%(asctime)s:%(levelname)%:%(message)s')
+logging.basicConfig(filename=LOG_FILE,level=logging.WARNING,format='%(asctime)s:%(levelname)s:%(message)s')
 
 def extract_urls():
     # Gets all the URLs for nursing homes
@@ -258,20 +258,21 @@ except Exception as e:
 # GeoJSON to TopoJSON conversion 
 def geojson_to_topojson(input_file, output_file):
     gdf = gpd.read_file(input_file, encoding='utf-8')
-    #Erstatt NaN verdier
-    gdf = gdf.replace({np.nan: None})
-
-    topo = topojson.Topology(gdf)
+    # Remove empty geometries
+    gdf = gdf[ gdf.geometry.notna() & (~gdf.geometry.is_empty) ]
+    geojson_dict = json.loads(gdf.to_json())
+    topo = topojson.Topology(geojson_dict)
     topo_json = json.dumps(topo.to_dict(), ensure_ascii=False, indent=4)
     with open(output_file, "w", encoding='utf-8') as f:
         f.write(topo_json)
-
-input_file = f'{GeoJSON_FILE}'
-output_file = f'{TopoJSON_FILE}'
+   
+input_geojson_file = f'{GeoJSON_FILE}'
+output_topojson_file = f'{TopoJSON_FILE}'
 try:
-    geojson_to_topojson(input_file, output_file)
+    geojson_to_topojson(input_geojson_file, output_topojson_file)
 except Exception as e:
     logging.error(f"Feil under GeoJSON til TopoJSON konvertering 'def_geojson_to_topojson': {e}")
+
 
 '''''''''
 Method for updating a dataset in CKAN
